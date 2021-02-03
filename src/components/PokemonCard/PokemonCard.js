@@ -1,25 +1,36 @@
 import React from 'react';
-import s from './style.module.css';
+import cn from 'classnames';
+
 import BkC from '../BkC.jpg';
-import { useState } from 'react';
 
-const PokemonCard =  ({type, img, name, id, values, key}) => {
+import s from './style.module.css';
 
-    const [isActive, setActive] = useState(false);
+export default class PokemonCard extends React.Component {
 
-    const handleClick = () => {
-        setActive(!isActive)
+    constructor(props) {
+        super(props)
+        this.state = {active: false}
     }
-    return (<div className={s.root} onClick={handleClick} key={key}>
-        <div className={`${s.pokemonCard} ${isActive ? s.active : ''}`}>
+
+    handleClick = () => {
+        this.setState({active: !this.state.active});
+    }
+
+    render(){
+
+        const {top, right, bottom, left} = this.props.values;
+        const {type, img, name, id} = this.props;
+    
+    return (<div className={s.root} onClick={this.handleClick}>
+        <div className={cn(s.pokemonCard, {[s.active]: this.state.active})}>
             <div className={s.cardFront}>
-                <div className={`${s.wrap} ${s.front}`}>
-                    <div className={`${s.pokemon} ${s[type]}`} >
+                <div className={cn(s.wrap, s.front)}>
+                    <div className={cn(s.pokemon ,s[type])} >
                         <div className={s.values}>
-                            <div className={`${s.count} ${s.top}`}>{values.top}</div>
-                            <div className={`${s.count} ${s.right}`}>{values.right}</div>
-                            <div className={`${s.count} ${s.bottom}`}>{values.bottom}</div>
-                            <div className={`${s.count} ${s.left}`}>{values.left}</div>
+                            <div className={cn(s.count, s.top)}>{top}</div>
+                            <div className={cn(s.count, s.right)}>{right}</div>
+                            <div className={cn(s.count, s.bottom)}>{bottom}</div>
+                            <div className={cn(s.count, s.left)}>{left}</div>
                         </div>
                         <div className={s.imgContainer}>
                             <img src={img} alt={name} />
@@ -34,13 +45,12 @@ const PokemonCard =  ({type, img, name, id, values, key}) => {
             </div>
 
             <div className={s.cardBack}>
-                <div className={`${s.wrap} ${s.back}`}>
+                <div className={cn(s.wrap, s.back)}>
                     <img src={BkC} alt="Сard Backed" />
                 </div>
             </div>
 
         </div>
     </div>)
+    }
 }
-
-export default PokemonCard;

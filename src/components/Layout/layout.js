@@ -1,4 +1,6 @@
 import React from 'react';
+import cn from 'classnames';
+
 import layoutCSS from './layout.module.css'
  
 export default class Layout extends React.Component {
@@ -14,7 +16,7 @@ export default class Layout extends React.Component {
                     <h3>{title}</h3>
                     <span class={layoutCSS.separator}></span>
                 </div>
-                <div className={layoutCSS.desc+' '+layoutCSS.full}>
+                <div className={cn(layoutCSS.desc, layoutCSS.full)}>
                     <p>{descr}</p>
                     <p>{children}</p>
                 </div>
