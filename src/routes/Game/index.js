@@ -34,9 +34,9 @@ const GamePage = () => {
     
     const handleAddPokemon = () => {
         const newKey = database.ref().child('pokemons').push().key;
-        const newPokemons = Object.entries(pokemons).reduce((acc,item) => {
+        const newPokemons = Object.entries(pokemons).reduce((acc, item) => {
             const pokemon = {...item[1]};
-            if (pokemon.active === true) {
+            if (pokemon.id === 25) {
                 database.ref('pokemons/' + newKey).set(pokemon);
                 acc[newKey] = pokemon;
             }
