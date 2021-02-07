@@ -1,9 +1,7 @@
 import Header from '../../components/Header/header';
 import Layout from '../../components/Layout/layout';
-import Footer from '../../components/Footer/footer';
-import MenuNavbar from '../../components/Menunavbar/MenuNavbar'
 import bg from '../../components/bg3.jpg';
-import PokemonCard from '../../components/PokemonCard/PokemonCard.js';
+import PokemonCard from '../../components/PokemonCardHome/PokemonCardHome';
 import POKEMONS from '../../components/Pokemons/Pokemons.json';
 import s from './style.module.css'
 
@@ -17,7 +15,6 @@ const HomePage = ({onChangePage}) => {
 
   return (
     <>
-      <MenuNavbar/>
       <Header 
       title='Pokemon Advanced' 
       descr='Collection card Game' 
@@ -42,7 +39,7 @@ const HomePage = ({onChangePage}) => {
        }
       </div>
       </Layout>
-      <Footer />
+      
     </>
   );
 }

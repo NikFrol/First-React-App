@@ -1,19 +1,17 @@
 import cn from 'classnames';
 import s from './Navbar.module.css';
 
-const Navbar = ({onChangeActive, stateActive}) => {
-    const handleClick = () => {
-        console.log('####: <NavBar/>');
-        onChangeActive && onChangeActive(true)
-    }
-   return(<nav id={s.navbar}>
+const Navbar = ({onChangeActive, bgActive = false,  stateActive}) => {
+
+   return(
+   <nav id={s.navbar} className={cn({[s.bgActive]: bgActive})}>
    <div className={s.navWrapper}>
      <p className={s.brand}>
        LOGO
      </p>
-     <a onClick={handleClick} className={cn(s.menuButton,{[s.active]: stateActive})}>
+     <div onClick={onChangeActive} className={cn(s.menuButton,{[s.active]: stateActive})}>
        <span />
-     </a>
+     </div>
    </div>
  </nav>)
 }

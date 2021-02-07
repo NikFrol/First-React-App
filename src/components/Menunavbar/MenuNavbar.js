@@ -3,19 +3,17 @@ import Navbar from './Navbar/Navbar.js'
 import {useState} from 'react';
 
 
-const MenuNavbar = () => {
-    
-    const [isActive, setActive] = useState(false);
+const MenuNavbar = ({bgActive}) => {
+    const [isActive, setActive] = useState(null);
     
     const handleClick = () => {
-        console.log('####: <MenuNavBar />');
-        setActive(!isActive);
+        setActive(prevState => !prevState);
     }
 
     return (
     <>
-    <Menu stateActive={isActive}/>
-    <Navbar onChangeActive={handleClick} stateActive={isActive}/>
+    <Menu stateActive={isActive} onChangeActive={handleClick}/>
+    <Navbar onChangeActive={handleClick} stateActive={isActive} bgActive={bgActive}/>
     </>
         );
 }

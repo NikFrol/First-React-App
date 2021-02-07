@@ -1,4 +1,13 @@
-.buttonContainern{
+.container {
+    width: fit-content;
+    position: absolute;
+    right: 0;
+    top: 70%;
+    left: 35%;
+}
+
+
+.buttonContainern {
     appearance: none;
     border: 0;
     border-radius: 5px;
@@ -7,6 +16,7 @@
     padding: 8px 16px;
     font-size: 16px;
 }
+
 .buttonContainern:hover {
     appearance: none;
     border: 0;
@@ -17,3 +27,9 @@
     font-size: 16px;
     background: #7f0b96;
 }
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }

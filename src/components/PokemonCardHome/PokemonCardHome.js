@@ -5,14 +5,24 @@ import BkC from '../BkC.jpg';
 
 import s from './style.module.css';
 
-const PokemonCard = ({type, img, name, id, values, isActive = false, onCardClick}) => {
-    
-    const {top, right, bottom, left} = values;
-    const onClickCard = () => {
-        onCardClick(id)
+export default class PokemonCard extends React.Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {active: false}
     }
-    return (<div className={s.root} onClick={onClickCard}>
-        <div className={cn(s.pokemonCard, {[s.active]: isActive})}>
+
+    handleClick = () => {
+        this.setState({active: !this.state.active});
+    }
+
+    render(){
+
+        const {top, right, bottom, left} = this.props.values;
+        const {type, img, name, id} = this.props;
+    
+    return (<div className={s.root} onClick={this.handleClick}>
+        <div className={cn(s.pokemonCard, {[s.active]: this.state.active})}>
             <div className={s.cardFront}>
                 <div className={cn(s.wrap, s.front)}>
                     <div className={cn(s.pokemon ,s[type])} >
@@ -42,5 +52,5 @@ const PokemonCard = ({type, img, name, id, values, isActive = false, onCardClick
 
         </div>
     </div>)
+    }
 }
-    export default PokemonCard;
