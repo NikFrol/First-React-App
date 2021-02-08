@@ -10,7 +10,7 @@
 .buttonContainern {
     appearance: none;
     border: 0;
-    border-radius: 5px;
+    border-radius: 10px;
     background: #d8d1da;
     color: rgb(12, 11, 11);
     padding: 8px 16px;
@@ -20,7 +20,7 @@
 .buttonContainern:hover {
     appearance: none;
     border: 0;
-    border-radius: 5px;
+    border-radius: 10px;
     background: #b546d7;
     color: #fff;
     padding: 8px 16px;

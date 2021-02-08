@@ -1,10 +1,14 @@
 import { useRouteMatch, Route, Switch, Redirect } from 'react-router-dom';
+import cn from 'classnames';
+
 import HomePage from './routes/Home/index';
 import GamePage from './routes/Game/index';
 import HeaderMenu from './components/Menunavbar/MenuNavbar';
-import Footer from './components/Footer/footer'
-import cn from 'classnames'
-import s from './App.module.css'
+import Footer from './components/Footer/footer';
+
+import s from './App.module.css';
+
+
 
 const App = () => {
 
