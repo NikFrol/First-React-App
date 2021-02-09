@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import {useHistory} from 'react-router-dom';
 import {useState} from 'react';
 import PokemonCard from '../../components/PokemonCard/PokemonCard';
@@ -29,8 +30,27 @@ const GamePage = () => {
            return newPokemons;
         })
     }
+=======
+import { useRouteMatch, Route, Switch } from 'react-router-dom';
+import {useState} from 'react';
+import StartPage from './routers/Start/Start';
+import BoardPage from './routers/Board/BoardPage';
+import FinishPage from './routers/Finish/Finish';
 
+import {PokemonContext} from '../../context/pokemonContext';
+
+const GamePage = () => {
+
+    const [pokemons, setSelected] = useState([])
+
+    const selectPokemon = (val) => {
+        setSelected(val);
+    };
+>>>>>>> Stashed changes
+
+    const match = useRouteMatch();
     return (
+<<<<<<< Updated upstream
     <> 
     <div className={s.flex}>
     {
@@ -52,6 +72,17 @@ const GamePage = () => {
         <h1>This is GamePage!!!</h1>
         </div>
     </>
+=======
+        <PokemonContext.Provider value={{
+            pokemons, 
+            selectPokemon: selectPokemon}} >
+        <Switch>
+            <Route path={`${match.path}/`} exact component={StartPage} />
+            <Route path={`${match.path}/board`} component={BoardPage} />
+            <Route path={`${match.path}/finish`} component={FinishPage} />
+        </Switch>
+        </PokemonContext.Provider>
+>>>>>>> Stashed changes
     );
 };
 
