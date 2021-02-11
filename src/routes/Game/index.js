@@ -1,77 +1,54 @@
-import {useState, useEffect} from 'react';
-import PokemonCard from '../../components/PokemonCard/PokemonCard';
-import Layout from '../../components/Layout/layout'
-import database from '../../service/firebase/firebase';
+import { useRouteMatch, Route, Switch } from 'react-router-dom';
+import { useState } from 'react';
+import StartPage from './routes/start/Start';
+import BoardPage from './routes/board/Board';
+import FinishPage from './routes/finish/Finish';
 
-import s from './style.module.css';
+import { PokemonContext } from '../../context/pokemonContext';
+
 
 
 const GamePage = () => {
-    
 
-    
-    const [pokemons, setPokemons] = useState({});
 
-    useEffect(() => {
-        database.ref('pokemons').once('value', (snapshot) => {
-            setPokemons(snapshot.val());
-        })
-    }, []);
+    const [pokemons, setSelected] = useState({});
+    const  match  =  useRouteMatch ( '/game' )
+    const selectPokemon = (key, pokemon) => {
+        setSelected(prevState => {
+            if (prevState[key]) {
+                const copyState = { ...prevState };
+                delete copyState[key];
 
-    const onCardClick = (id) => {
-        const newBase = Object.entries(pokemons).reduce((acc, item) => {
-            const pokemon = {...item[1]};
-            if (pokemon.id === id) {
-                pokemon.active = !pokemon.active;
-            };
-            acc[item[0]] = pokemon; 
-            return acc;
-         }, {});
-         database.ref('pokemons/').set({...newBase});
-
-        setPokemons(newBase);
-    };
-    
-    const handleAddPokemon = () => {
-        const newKey = database.ref().child('pokemons').push().key;
-        const newPokemons = Object.entries(pokemons).reduce((acc, item) => {
-            const pokemon = {...item[1]};
-            if (pokemon.id === 25) {
-                database.ref('pokemons/' + newKey).set(pokemon);
-                acc[newKey] = pokemon;
+                return copyState
             }
-            acc[item[0]] = pokemon;
-            return acc;
-        }, {})
-        
-        setPokemons(newPokemons);
+            return ({
+                ...prevState,
+                [key]: pokemon
+
+            });
+        });
+    };
+
+    const dischargeContext = () => {
+        setSelected({});
+
     }
 
     return (
-    <> 
-    <Layout id='03' title={'Welcome'} colorBg='black'>
-    <div className={s.flex}> 
-    <button className={s.buttonContainern} onClick={handleAddPokemon} >
-    Add new Pokemon
-    </button>
-    </div>
-    <div className={s.flex}>
-    {
-         Object.entries(pokemons).map(([key, {type, img, name, id, values, active}]) => <PokemonCard 
-         key={key} 
-         type={type} 
-         img={img} 
-         name={name} 
-         id={id} 
-         values={values} 
-         onCardClick={onCardClick}
-         isActive={active}
-         />)
-       }
-      </div>
-      </Layout>
-    </>
-    );
-};
+
+        <PokemonContext.Provider value={{
+            pokemons: pokemons,
+            selectPokemon: selectPokemon,
+            dischargeContext: dischargeContext,
+        }} >
+            <Switch>
+                <Route path={`${match.path}/`} exact component={StartPage} />
+                <Route path={`${match.path}/board`} component={BoardPage} />
+                <Route path={`${match.path}/finish`} component={FinishPage} />
+            </Switch>
+        </PokemonContext.Provider>
+    )
+}
+
 
 export default GamePage;

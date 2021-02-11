@@ -45,10 +45,10 @@ export default class PokemonCard extends React.Component {
             </div>
 
             <div className={s.cardBack}>
-                <div className={cn(s.wrap, s.back)}>
-                    <img src={BkC} alt="Сard Backed" />
-                </div>
+                <div className={cn(s.wrap, s.back)} />
+                <img src={BkC} alt="Сard Backed" />
             </div>
+            
 
         </div>
     </div>)
