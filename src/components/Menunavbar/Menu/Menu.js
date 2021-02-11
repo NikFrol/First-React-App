@@ -7,9 +7,10 @@ const Menu = ({ stateActive, onChangeActive}) => {
 
   const menuItems = [
     { name: 'HOME', to: '/' },
-    { name: 'GAME', to: "game" },
-    { name: 'ABOUT', to: "about" },
-    { name: 'CONTACT', to: "contact" }
+    { name: 'GAME', to: "/game" },
+    { name: 'ABOUT', to: "/about" },
+    { name: 'CONTACT', to: "/contact" }
+
   ]
 
   const classNames = cn(s.menuContainer, { [s.active]: stateActive === true, [s.deactive]: stateActive === false })
