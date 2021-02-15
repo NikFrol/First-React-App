@@ -40,9 +40,12 @@
 .pokemonCard.selected {
     margin-top: 20px;
     margin-bottom: -20px;
-    border-radius: 24px; 
-    width: 75%;
-    min-width: 75%;
+    margin-left: 60px;
+    border-radius: 15px; 
+    background-color:rgb(245, 142, 142);
+    width: 50%;
+    height: 75%;
+    min-width: 50%;
     min-height: 25%;
     
 }

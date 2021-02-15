@@ -8,7 +8,7 @@ const PokemonCard = ({ unicId, type, img, name, id, values, isActive, onCardClic
 
     const { top, right, bottom, left } = values;
     const onClickCard = () => {
-        onCardClick(unicId)
+        onCardClick && onCardClick(unicId);
     }
 
 

@@ -50,13 +50,14 @@ const Start = () => {
 
     return (
         <>
-            <Layout id='03' title={'Welcome'} colorBg='black'>
+            
                 <div className={s.flex}>
                     <button className={cn(s.buttonContainern, s.container)} 
                     disabled={Object.keys(pokemonContext.pokemons).length < 5}
                     onClick={hendleStart}>
                             Let's play!
                     </button>
+                    
                 </div>
                 <div className={s.flex}>
                     {
@@ -81,7 +82,7 @@ const Start = () => {
                         />)
                     }
                 </div>
-            </Layout>
+            
         </>
     );
 };
