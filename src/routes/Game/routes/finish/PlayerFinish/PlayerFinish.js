@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import cn from 'classnames';
 
 import PokemonCard from '../../../../../components/PokemonCard/PokemonCard';
 import { Player2Context } from '../../../../../context/pokemonContext';
@@ -16,11 +17,11 @@ const PlayerFinish = ({ cards, player }) => {
 
             if (item.id === id) {
                 firebase.addPokemon(item);
+                dischargeContext2();
             };
 
             return;
         })
-        dischargeContext2();
     };
 
     return (

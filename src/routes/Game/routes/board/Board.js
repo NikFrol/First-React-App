@@ -95,6 +95,8 @@ const BoardPage = () => {
 
             setBoard(request.data);
 
+            setChoiceCard(null);
+
             setSteps(prevState => prevState + 1);
         }
     }

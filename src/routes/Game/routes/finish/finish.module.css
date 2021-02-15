@@ -34,6 +34,8 @@
 
 
 .buttonContainern {
+    
+    justify-content: center;
     position: absolute;
     top: 40%;
     left: 40%;
@@ -59,8 +61,7 @@
     background: #7f0b96;
 }
 .flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-gap: 40px;
   }
