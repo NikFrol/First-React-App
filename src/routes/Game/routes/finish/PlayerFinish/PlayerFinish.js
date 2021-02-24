@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import cn from 'classnames';
+
 
 import PokemonCard from '../../../../../components/PokemonCard/PokemonCard';
 import { Player2Context } from '../../../../../context/pokemonContext';
@@ -20,7 +20,7 @@ const PlayerFinish = ({ cards, player }) => {
                 dischargeContext2();
             };
 
-            return;
+            return item;
         })
     };
 

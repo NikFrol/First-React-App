@@ -38,7 +38,7 @@ const Finish = () => {
         </div>
         <button className={s.buttonContainern} onClick={handleClickEnd} 
         disabled={pokemons2.length > 0}>
-        Finish Game!
+        {pokemons2.length > 0 ? 'Choose your bounty!' : 'Play Again'}
         </button>
         <div className={s.playerTwo}>
         <PlayerFinish cards={pokemons2}

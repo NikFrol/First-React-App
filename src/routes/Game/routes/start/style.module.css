@@ -1,10 +1,10 @@
 .card {
-    width: 400px;
-    height: 400px;
+    width: 90%;
+    height: 380px;
     cursor: pointer;
     right: 0%;
-    top: 0%;
-    left: 10%;
+    top: -5%;
+    left: 5%;
     
 }
 
@@ -30,17 +30,15 @@
 
 
 .buttonContainern {
-    width: 250px;
-    height: 70px;
-    position:absolute;
-    right: 0%;
-    top: -20%;
-    left: 100%;
-    position: relative;
+    position: absolute;
+    width: 30%;
+    height: 10%;
+    left: 35%;
+    bottom: 0%;
     appearance: none;
     border: 5px;
     border-radius: 5px;
-    background: #d8d1da;
+    background: #fcea83;
     color: rgb(12, 11, 11);
     padding: 8px 16px;
     font-size: 16px;
@@ -50,14 +48,18 @@
     appearance: none;
     border: 0;
     border-radius: 5px;
-    background: #b546d7;
+    background: #ffda0b;
     color: #fff;
-    padding: 8px 16px;
-    font-size: 16px;
-    background: #7f0b96;
+    
 }
 .flex {
     display: grid;
     grid-template-columns: auto auto auto;
     grid-gap: 40px;
+    height:100%;
+    min-height: 180px;
+    background-color: rgb(221, 216, 211);
+    
+    
+    
   }
