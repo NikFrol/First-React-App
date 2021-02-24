@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import {useHistory} from 'react-router-dom';
 import PokemonCard from '../../../../components/PokemonCard/PokemonCard';
-import Layout from '../../../../components/Layout/layout'
+
 
 import { FireBaseContext } from '../../../../service/firebase/firebaseContext';
 import { PokemonContext } from '../../../../context/pokemonContext';
@@ -48,6 +48,8 @@ const Start = () => {
       history.push('/game/board');
     }
 
+    const playerOneLengthState = Object.keys(pokemonContext.pokemons).length;
+
     return (
         <>
             
@@ -55,7 +57,7 @@ const Start = () => {
                     <button className={cn(s.buttonContainern, s.container)} 
                     disabled={Object.keys(pokemonContext.pokemons).length < 5}
                     onClick={hendleStart}>
-                            Let's play!
+                            {playerOneLengthState < 5 ? `Chose ${ 5 - playerOneLengthState} pokemons!` : `Let's play!`}
                     </button>
                     
                 </div>

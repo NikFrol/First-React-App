@@ -1,24 +1,30 @@
+import { useSelector, useDispatch} from 'react-redux';
+
 import Header from '../../components/Header/header';
 import Layout from '../../components/Layout/layout';
 import bg from '../../components/bg3.jpg';
 import PokemonCard from '../../components/PokemonCardHome/PokemonCardHome';
 import POKEMONS from '../../components/Pokemons/Pokemons.json';
-import s from './style.module.css'
+
+import s from './style.module.css';
 
 
-const HomePage = ({onChangePage}) => {
-  
+const HomePage = ({ onChangePage }) => {
+
+  const dispatch = useDispatch()
+  const count = useSelector(state => state.value);
+  console.log('####Count:', count);
   const handleClickButton = (page) => {
-    console.log('####: <HomePage />');
     onChangePage && onChangePage(page);
   }
 
   return (
     <>
-      <Header 
-      title='Pokemon Advanced' 
-      descr='Collection card Game' 
-      onClickButton={handleClickButton}/>
+      <Header
+        title='Pokemon Advanced'
+        descr='Collection card Game'
+        onClickButton={handleClickButton} />
+
       <Layout id='01' title='Game Rules' descr="Let's play!" urlBg={bg}>
         In the game two players face off against one another, one side playing as "blue", the other as "red" on a 3x3 grid.
         Each player has five cards in a hand and the aim is to capture the opponent's cards by turning
@@ -30,16 +36,15 @@ const HomePage = ({onChangePage}) => {
         If the rank of the opponent's card is higher than the player's card, the player's card will be captured and turned into the opponent's color.
         If the player's rank is higher, the opponent's card will be captured and changed into the player's color instead.
    </Layout>
-      <Layout id='02' title='Second element' descr='Second Layout Element.' />
-      <Layout id='03' title='Cards' descr='Some cards' colorBg='grey'>
-      <div className={s.flex}>
-       {
-         POKEMONS.map((item) => <PokemonCard key={item.id} 
-         type={item.type} img={item.img} name={item.name} id={item.id} values={item.values}/>)
-       }
-      </div>
+      <Layout id='02' title='Cards' descr='Some cards'>
+        <div className={s.flex}>
+          {
+            POKEMONS.map((item) => <PokemonCard key={item.id}
+              type={item.type} img={item.img} name={item.name} id={item.id} values={item.values} />)
+          }
+        </div>
       </Layout>
-      
+
     </>
   );
 }
