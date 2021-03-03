@@ -16,7 +16,7 @@ const counterWin = (board, player1, player2) => {
     let player2Count = player2.length;
 
     board.forEach(item => {
-        console.log(item)
+
         if (item.card.possession === 'blue') {
             player1Count++;
         }

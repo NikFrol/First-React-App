@@ -1,19 +1,15 @@
-import { useSelector, useDispatch} from 'react-redux';
-
 import Header from '../../components/Header/header';
 import Layout from '../../components/Layout/layout';
-import bg from '../../components/bg3.jpg';
+import bg from '../../assets/bg3.jpg';
 import PokemonCard from '../../components/PokemonCardHome/PokemonCardHome';
 import POKEMONS from '../../components/Pokemons/Pokemons.json';
 
 import s from './style.module.css';
 
 
+
 const HomePage = ({ onChangePage }) => {
 
-  const dispatch = useDispatch()
-  const count = useSelector(state => state.value);
-  console.log('####Count:', count);
   const handleClickButton = (page) => {
     onChangePage && onChangePage(page);
   }
