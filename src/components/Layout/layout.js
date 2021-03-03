@@ -14,11 +14,11 @@ export default class Layout extends React.Component {
             <article>
                 <div className={layoutCSS.title}>
                     <h3>{title}</h3>
-                    <span class={layoutCSS.separator}></span>
+                    <span className={layoutCSS.separator}></span>
                 </div>
                 <div className={cn(layoutCSS.desc, layoutCSS.full)}>
                     <p>{descr}</p>
-                    <p>{children}</p>
+                    <div>{children}</div>
                 </div>
             </article>
         </div>
