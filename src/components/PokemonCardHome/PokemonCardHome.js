@@ -1,7 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
 
-import BkC from '../BkC.jpg';
+import BkC from '../../assets/BkC.jpg';
 
 import s from './style.module.css';
 

@@ -23,7 +23,7 @@ const App = () => {
     const isPading = location.pathname === '/' || location.pathname === '/game/board';
 
     return (
-        <FireBaseContext.Provider value={new FireBase()}>
+        <FireBaseContext.Provider value={FireBase}>
             <Switch>
                 <Route path='/404' render={() => (
                     <h1>Not Found 404</h1>)}
@@ -36,10 +36,10 @@ const App = () => {
                                 <Route path='/' exact component={HomePage} />
                                 <Route path='/game' component={GamePage} />
                                 <Route path='/about' render={() => (
-                                    <h1>This page ABOUT!</h1>
+                                    <h1>About</h1>
                                 )} />
                                 <Route path='/contact' render={() => (
-                                    <h1>This page CONTACT!</h1>
+                                    <h1>Contacts</h1>
                                 )} />
                                 <Route render={() => (
                                     <Redirect to={'/404'} />

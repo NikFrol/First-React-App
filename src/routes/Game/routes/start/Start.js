@@ -1,39 +1,45 @@
 import { useState, useEffect, useContext } from 'react';
-import {useHistory} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
 import PokemonCard from '../../../../components/PokemonCard/PokemonCard';
-
-
-import { FireBaseContext } from '../../../../service/firebase/firebaseContext';
 import { PokemonContext } from '../../../../context/pokemonContext';
 import cn from 'classnames';
+
+import { selectPokemonsdata, selectPokemonsLoding, getPokemonsAsync } from '../../../../store/pokemon';
+
 import s from './style.module.css';
-
-
 
 const Start = () => {
 
-    const pokemonContext = useContext(PokemonContext)
-    const firebase = useContext(FireBaseContext);
+    const pokemonContext = useContext(PokemonContext);
     const history = useHistory();
+    const isLoding = useSelector(selectPokemonsLoding);
+    const pokemonsRedux = useSelector(selectPokemonsdata);
+    const dispatch = useDispatch();
 
+    console.log('####: pokemonsRedux', pokemonsRedux);
 
     const [pokemons, setPokemons] = useState({});
 
     useEffect(() => {
-        firebase.getPokemonSoket((pokemons) => {
-            setPokemons(pokemons);
-        });
+
+        dispatch(getPokemonsAsync());
         pokemonContext.dischargeContext();
 
-        return (() => firebase.offPokemonSoket());
     }, []);
 
-    const onCardClick = (key) => {
+    useEffect(() => {
         
-        const pokemon = {...pokemons[key]}
+        setPokemons(pokemonsRedux);
+    }, [pokemonsRedux]);
+
+    const onCardClick = (key) => {
+
+        const pokemon = { ...pokemons[key] }
         pokemonContext.selectPokemon(key, pokemon)
 
-        
+
         setPokemons(prevState => ({
             ...prevState,
             [key]: {
@@ -45,46 +51,48 @@ const Start = () => {
     };
 
     const hendleStart = () => {
-      history.push('/game/board');
+        history.push('/game/board');
     }
 
     const playerOneLengthState = Object.keys(pokemonContext.pokemons).length;
 
     return (
         <>
-            
-                <div className={s.flex}>
-                    <button className={cn(s.buttonContainern, s.container)} 
+
+            <div className={s.flex}>
+                <button className={cn(s.buttonContainern, s.container)}
                     disabled={Object.keys(pokemonContext.pokemons).length < 5}
                     onClick={hendleStart}>
-                            {playerOneLengthState < 5 ? `Chose ${ 5 - playerOneLengthState} pokemons!` : `Let's play!`}
-                    </button>
+                    {playerOneLengthState < 5 ? `Chose ${5 - playerOneLengthState} pokemons!` : `Let's play!`}
+                </button>
+
+            </div>
+            <div className={s.flex}> 
+            {isLoding ? <h1>Wait minute...</h1> : null}
+                {
                     
-                </div>
-                <div className={s.flex}>
-                    {
-                        Object.entries(pokemons).map(([key, { type, img, name, id, values, selected}]) => <PokemonCard
-                            key={key}
-                            type={type}
-                            img={img}
-                            name={name}
-                            id={id}
-                            values={values}
-                            onCardClick={() => {
-                                if (Object.keys(pokemonContext.pokemons).length < 5 || selected) {
-                                    onCardClick(key)
-                                }
-                                
-                            }}
-                            isActive={true}
-                            unicId={key}
-                            minimize={false}
-                            className={s.card}
-                            isSelected={selected}
-                        />)
-                    }
-                </div>
-            
+                    Object.entries(pokemons).map(([key, { type, img, name, id, values, selected }]) => <PokemonCard
+                        key={key}
+                        type={type}
+                        img={img}
+                        name={name}
+                        id={id}
+                        values={values}
+                        onCardClick={() => {
+                            if (Object.keys(pokemonContext.pokemons).length < 5 || selected) {
+                                onCardClick(key)
+                            }
+
+                        }}
+                        isActive={true}
+                        unicId={key}
+                        minimize={false}
+                        className={s.card}
+                        isSelected={selected}
+                    />)
+                }
+            </div>
+
         </>
     );
 };

@@ -16,7 +16,7 @@ const counterWin = (board, player1, player2) => {
     let player2Count = player2.length;
 
     board.forEach(item => {
-        console.log(item)
+
         if (item.card.possession === 'blue') {
             player1Count++;
         }
@@ -48,25 +48,32 @@ const BoardPage = () => {
 
     const history = useHistory();
 
-    useEffect(async () => {
-        const boardResponse = await fetch('https://reactmarathon-api.netlify.app/api/board');
-        const boardRequest = await boardResponse.json();
-
-        setBoard(boardRequest.data);
-
-        const boardPlayr2Response = await fetch('https://reactmarathon-api.netlify.app/api/create-player');
-        const boardPlayer2Request = await boardPlayr2Response.json();
+    useEffect(() => {
+        const foo = async () => {
+            const boardResponse = await fetch('https://reactmarathon-api.netlify.app/api/board');
+            const boardRequest = await boardResponse.json();
+            setBoard(boardRequest.data);
+        };
 
 
-        setPlayer2(boardPlayer2Request.data.map((item) => ({
-            ...item,
-            possession: 'red',
-        })))
-        pokemonsPlyaer2.setPokemonsPlayer2(boardPlayer2Request.data);
+        const bar = async () => {
+            const boardPlayr2Response = await fetch('https://reactmarathon-api.netlify.app/api/create-player');
+            const boardPlayer2Request = await boardPlayr2Response.json();
+            setPlayer2(boardPlayer2Request.data.map((item) => ({
+                ...item,
+                possession: 'red',
+            })))
+            pokemonsPlyaer2.setPokemonsPlayer2(boardPlayer2Request.data);
+        };
+
+        foo();
+        bar();
+
+        
 
         setTimeout(() => {
             const fristPlyaer = Math.floor(Math.random() * Math.floor(2));
-            setActivePlayer(fristPlyaer);
+            setActivePlayer(fristPlyaer, () => console.log('####: isIt!'));
         }, 3000)
         setTimeout(() => setArrowActive(false), 5000);
 
