@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+import Input from '../Imput/Imput';
+import s from './login.module.css';
+
 const LoginForm = ({ onSubmit }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -8,28 +11,31 @@ const LoginForm = ({ onSubmit }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         onSubmit && onSubmit({
-            email,
-            password,
+            email: email.target.value,
+            password: password.target.value,
         });
-        setPassword('');
-        setEmail('');
+        
     };
+
+    const isTargetValue = (el) => el && el.target.value;
 
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <input
-                    value={email}
+                <Input
+                    label={'Email'}
+                    value={isTargetValue(email)}
                     type='text'
                     name='email'
-                    onChange={(e) => setEmail(e.target.value)} />
-                <input
-                    value={password}
+                    onChange={setEmail} />
+                <Input
+                    label={'Password'}
+                    value={isTargetValue(password)}
                     type='password'
                     name='password'
-                    onChange={(e) => setPassword(e.target.value)} />
+                    onChange={setPassword} />
             </div>
-            <button>
+            <button className={s.buttonContainern}>
                 Login
             </button>
         </form>

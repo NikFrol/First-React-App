@@ -8,6 +8,7 @@ import cn from 'classnames';
 
 import { selectPokemonsdata, selectPokemonsLoding, getPokemonsAsync } from '../../../../store/pokemon';
 
+import loding from '../../../../assets/4tym.gif';
 import s from './style.module.css';
 
 const Start = () => {
@@ -30,7 +31,7 @@ const Start = () => {
     }, []);
 
     useEffect(() => {
-        
+
         setPokemons(pokemonsRedux);
     }, [pokemonsRedux]);
 
@@ -67,31 +68,31 @@ const Start = () => {
                 </button>
 
             </div>
-            <div className={s.flex}> 
-            {isLoding ? <h1>Wait minute...</h1> : null}
-                {
-                    
-                    Object.entries(pokemons).map(([key, { type, img, name, id, values, selected }]) => <PokemonCard
-                        key={key}
-                        type={type}
-                        img={img}
-                        name={name}
-                        id={id}
-                        values={values}
-                        onCardClick={() => {
-                            if (Object.keys(pokemonContext.pokemons).length < 5 || selected) {
-                                onCardClick(key)
-                            }
+            <div className={s.flex}>
+                {isLoding ? <img src={loding} alt="it loding gif" className={s.loding}></img> : null}
+            {
 
-                        }}
-                        isActive={true}
-                        unicId={key}
-                        minimize={false}
-                        className={s.card}
-                        isSelected={selected}
-                    />)
-                }
-            </div>
+                Object.entries(pokemons).map(([key, { type, img, name, id, values, selected }]) => <PokemonCard
+                    key={key}
+                    type={type}
+                    img={img}
+                    name={name}
+                    id={id}
+                    values={values}
+                    onCardClick={() => {
+                        if (Object.keys(pokemonContext.pokemons).length < 5 || selected) {
+                            onCardClick(key)
+                        }
+
+                    }}
+                    isActive={true}
+                    unicId={key}
+                    minimize={false}
+                    className={s.card}
+                    isSelected={selected}
+                />)
+            }
+        </div>
 
         </>
     );

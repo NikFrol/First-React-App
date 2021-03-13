@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 
@@ -31,7 +31,7 @@ const counterWin = (board, player1, player2) => {
 const BoardPage = () => {
 
     const { pokemons } = useContext(PokemonContext);
-    const pokemonsPlyaer2 = useContext(Player2Context);
+    const pokemonsPlyaer2 = useRef(useContext(Player2Context));
 
     const [arrowActive, setArrowActive] = useState(true)
     const [activePlayer, setActivePlayer] = useState(null)
@@ -49,27 +49,25 @@ const BoardPage = () => {
     const history = useHistory();
 
     useEffect(() => {
-        const foo = async () => {
+        const boardFetch = async () => {
             const boardResponse = await fetch('https://reactmarathon-api.netlify.app/api/board');
             const boardRequest = await boardResponse.json();
             setBoard(boardRequest.data);
         };
 
+        boardFetch();
 
-        const bar = async () => {
+        const boardPlyaer2Fetch = async () => {
             const boardPlayr2Response = await fetch('https://reactmarathon-api.netlify.app/api/create-player');
             const boardPlayer2Request = await boardPlayr2Response.json();
             setPlayer2(boardPlayer2Request.data.map((item) => ({
                 ...item,
                 possession: 'red',
             })))
-            pokemonsPlyaer2.setPokemonsPlayer2(boardPlayer2Request.data);
+            pokemonsPlyaer2.current.setPokemonsPlayer2(boardPlayer2Request.data);
         };
 
-        foo();
-        bar();
-
-        
+        boardPlyaer2Fetch();
 
         setTimeout(() => {
             const fristPlyaer = Math.floor(Math.random() * Math.floor(2));
@@ -126,6 +124,7 @@ const BoardPage = () => {
             type.value = 'win';
         } else if (count1 < count2) {
             type.value = 'lose';
+            
         } else {
             type.value = 'draw';
         }

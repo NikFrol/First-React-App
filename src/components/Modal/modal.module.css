@@ -4,7 +4,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background: rgba(252, 231, 86, .75);
+    background: rgba(197, 195, 184, 0.75);
     visibility: hidden;
     opacity: 0;
     transition: all 0.25s ease-in-out;
