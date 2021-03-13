@@ -15,10 +15,11 @@ const MenuNavbar = ({ bgActive }) => {
 
     const handleClickLogin = () => {
         setOpenModal(prevState => !prevState);
+
     };
 
-    const handleSubmitLoginForm = (values) => {
-        console.log(values, '####')
+    const handleSubmitLoginForm = (data) => {
+        console.log(data,'####');
     };
 
     return (
@@ -33,7 +34,7 @@ const MenuNavbar = ({ bgActive }) => {
             <Modal title={'Log in...'}
                 isOpen={isOpenModal}
                 onCloseModal={handleClickLogin}>
-                <LoginForm 
+                <LoginForm
                     onSubmit={handleSubmitLoginForm}
                 />
             </Modal>

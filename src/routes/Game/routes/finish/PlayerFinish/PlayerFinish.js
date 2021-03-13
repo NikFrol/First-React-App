@@ -10,7 +10,7 @@ import s from './playerFinish.module.css';
 const PlayerFinish = ({ cards, player }) => {
 
     const firebase = useContext(FireBaseContext);
-    const { pokemons2, dischargeContext2} = useContext(Player2Context);
+    const { pokemons2, dischargeContext2 } = useContext(Player2Context);
 
     const handleSelectedNewCard = (id) => {
         pokemons2.map((item) => {
@@ -29,6 +29,7 @@ const PlayerFinish = ({ cards, player }) => {
             {
                 cards.map((item) => (
                     <div className={s.cardBoard}
+                        key={item.id}
                     >
 
                         <PokemonCard
@@ -44,7 +45,7 @@ const PlayerFinish = ({ cards, player }) => {
                             possession={player.possession}
                             unicId={item.id}
                             className={s.card}
-                            
+
                         />
                     </div>)
                 )}
