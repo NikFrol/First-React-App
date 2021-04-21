@@ -1,8 +1,9 @@
+
+import { useState } from 'react';
+
 import Menu from './Menu/Menu.js';
 import Navbar from './Navbar/Navbar.js';
-import Modal from '../Modal/Modal';
-import LoginForm from '../LoginForm/LoginForm';
-import { useState } from 'react';
+
 
 
 const MenuNavbar = ({ bgActive }) => {
@@ -19,9 +20,10 @@ const MenuNavbar = ({ bgActive }) => {
     };
 
     const handleSubmitLoginForm = (data) => {
-        console.log(data,'####');
+        console.log(data, '####');
     };
 
+    console.log('####:', isOpenModal);
     return (
         <>
             <Menu stateActive={isActive}
@@ -31,13 +33,6 @@ const MenuNavbar = ({ bgActive }) => {
                 stateActive={isActive}
                 bgActive={bgActive}
                 onClickLogin={handleClickLogin} />
-            <Modal title={'Log in...'}
-                isOpen={isOpenModal}
-                onCloseModal={handleClickLogin}>
-                <LoginForm
-                    onSubmit={handleSubmitLoginForm}
-                />
-            </Modal>
         </>
     );
 }

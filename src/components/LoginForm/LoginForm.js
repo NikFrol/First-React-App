@@ -1,12 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Input from '../Imput/Imput';
 import s from './login.module.css';
 
-const LoginForm = ({ onSubmit }) => {
+const LoginForm = ({ onSubmit, isResetForm = false }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -14,7 +13,7 @@ const LoginForm = ({ onSubmit }) => {
             email: email.target.value,
             password: password.target.value,
         });
-        
+
     };
 
     const isTargetValue = (el) => el && el.target.value;
